@@ -31,9 +31,6 @@ const cartSlice = createSlice({
         );
       }
     },
-    discardProduct: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload.id);
-    },
   },
 });
 
