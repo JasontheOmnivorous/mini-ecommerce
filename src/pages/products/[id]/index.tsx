@@ -1,11 +1,22 @@
-import { useAppSelector } from "@/store/hooks";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { addToCart } from "@/store/slices/cartSlice";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from "@mui/material";
 import { useRouter } from "next/router";
 
 const ProductPage = () => {
   const id = useRouter().query.id;
   const products = useAppSelector((store) => store.product.items);
   const filteredProduct = products.find((product) => product.id === Number(id));
+  const dispatch = useAppDispatch();
+
+  if (!filteredProduct) return null;
 
   return (
     <Box
@@ -39,6 +50,15 @@ const ProductPage = () => {
           />
           <Typography sx={{ m: 2 }}>{filteredProduct?.description}</Typography>
         </CardContent>
+        <CardActions>
+          {/* dispatch the product when added to the cart */}
+          <Button
+            onClick={() => dispatch(addToCart(filteredProduct))}
+            variant="contained"
+          >
+            add to cart
+          </Button>
+        </CardActions>
       </Card>
     </Box>
   );
