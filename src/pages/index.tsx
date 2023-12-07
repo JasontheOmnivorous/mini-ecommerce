@@ -5,6 +5,7 @@ import { fetchProducts } from "@/store/slices/productSlice";
 import { ShoppingCart } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import { Product } from "@prisma/client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -59,7 +60,9 @@ export default function Home() {
               {cartItems.length}
             </Typography>
           )}
-          <ShoppingCart sx={{ fontSize: 50, mr: 10, color: "crimson" }} />
+          <Link href={"/cart"}>
+            <ShoppingCart sx={{ fontSize: 50, mr: 10, color: "crimson" }} />
+          </Link>
         </Box>
       </Box>
 

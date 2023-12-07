@@ -11,7 +11,8 @@ import {
 import { useRouter } from "next/router";
 
 const ProductPage = () => {
-  const id = useRouter().query.id;
+  const router = useRouter();
+  const id = router.query.id;
   const products = useAppSelector((store) => store.product.items);
   const filteredProduct = products.find((product) => product.id === Number(id));
   const dispatch = useAppDispatch();
@@ -53,7 +54,13 @@ const ProductPage = () => {
         <CardActions>
           {/* dispatch the product when added to the cart */}
           <Button
-            onClick={() => dispatch(addToCart(filteredProduct))}
+            onClick={() => {
+              dispatch(addToCart({ ...filteredProduct, quantity: 1 }));
+              {
+                /* add quantity for further usage */
+              }
+              router.push("/"); // navigate back to home page after adding to the cart
+            }}
             variant="contained"
           >
             add to cart
