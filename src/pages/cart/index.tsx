@@ -1,6 +1,6 @@
 import ProductCard from "@/components/product/ProductCard";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { updateQuantity } from "@/store/slices/cartSlice";
+import { confirmOrder, updateQuantity } from "@/store/slices/cartSlice";
 import { AddCircle, RemoveCircle } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
 
@@ -21,6 +21,10 @@ const CartPage = () => {
   const decreaseQuantity = (id: number, quantity: number) => {
     dispatch(updateQuantity({ id, quantity }));
   };
+
+  const handleConfirmOrder = () => {
+    dispatch(confirmOrder(cartItems))
+  }
 
   return (
     <Box
@@ -85,7 +89,7 @@ const CartPage = () => {
           <Typography sx={{ m: 5 }} variant="h5">
             Total Price: {getCartTotalPrice()}
           </Typography>
-          <Button sx={{ m: 5 }} variant="contained">
+          <Button sx={{ m: 5 }} variant="contained" onClick={handleConfirmOrder}>
             confirm order
           </Button>
         </Box>
