@@ -37,6 +37,7 @@ model Orderline {
 }
 
 // prisma enum type
+// we can only use one of these values inside when we use OrderStatus type
 enum OrderStatus {
   ORDERED
   OUTFORDELIVERY
