@@ -23,6 +23,12 @@ export default function Home() {
     if (products.length) setFilteredProducts(products); // if the products has data, update the state
   }, [products]);
 
+  const showQuantity = () => {
+    let totalItems = 0;
+    cartItems.forEach((item) => (totalItems += item.quantity));
+    return totalItems;
+  };
+
   return (
     <Box
       sx={{
@@ -57,7 +63,7 @@ export default function Home() {
                 textAlign: "center",
               }}
             >
-              {cartItems.length}
+              {showQuantity()}
             </Typography>
           )}
           <Link href={"/cart"}>

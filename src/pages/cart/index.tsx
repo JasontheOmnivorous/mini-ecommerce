@@ -3,10 +3,12 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { confirmOrder, updateQuantity } from "@/store/slices/cartSlice";
 import { AddCircle, RemoveCircle } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
 const CartPage = () => {
   const cartItems = useAppSelector((store) => store.cart.items);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const getCartTotalPrice = () => {
     let totalPrice = 0;
@@ -23,8 +25,9 @@ const CartPage = () => {
   };
 
   const handleConfirmOrder = () => {
-    dispatch(confirmOrder(cartItems))
-  }
+    dispatch(confirmOrder(cartItems));
+    router.push("/confirmation");
+  };
 
   return (
     <Box
@@ -89,7 +92,11 @@ const CartPage = () => {
           <Typography sx={{ m: 5 }} variant="h5">
             Total Price: {getCartTotalPrice()}
           </Typography>
-          <Button sx={{ m: 5 }} variant="contained" onClick={handleConfirmOrder}>
+          <Button
+            sx={{ m: 5 }}
+            variant="contained"
+            onClick={handleConfirmOrder}
+          >
             confirm order
           </Button>
         </Box>
