@@ -26,7 +26,21 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.items = [...state.items, action.payload]; // push the payloads inside items array
+      // search if the product added to cart exists
+      const existingId = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+
+      // if it exists, find it and increment it's quantity
+      if (existingId) {
+        state.items = state.items.map((item) =>
+          item.id === existingId.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        state.items = [...state.items, action.payload];
+      }
     },
     updateQuantity: (state, action) => {
       const actionQuantity = action.payload.quantity;
