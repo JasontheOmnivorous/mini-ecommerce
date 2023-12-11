@@ -9,7 +9,7 @@ const initialState: CartSlice = {
 };
 
 export const confirmOrder = createAsyncThunk(
-  "cartSlice/confirmOrder",
+  "cart/confirmOrder",
   async (payload: CartItem[], thunkApi) => {
     const response = await fetch(`${config.apiBaseUrl}/order`, {
       method: "POST",
