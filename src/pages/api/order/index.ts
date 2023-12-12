@@ -43,7 +43,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    postHandler(req, res);
+   await postHandler(req, res);
   } else {
     res.status(405).send("Method not defined.");
   }
