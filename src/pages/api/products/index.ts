@@ -7,9 +7,9 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   return res.status(200).send(products);
 };
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
-    getHandler(req, res);
+    await getHandler(req, res);
   } else {
     res.status(405).send("Invalid method.");
   }
