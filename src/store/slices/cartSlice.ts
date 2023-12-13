@@ -1,4 +1,8 @@
-import { CartSlice, ConfirmOrderOptions } from "@/types/cart";
+import {
+  CancelOrderOptions,
+  CartSlice,
+  ConfirmOrderOptions,
+} from "@/types/cart";
 import { config } from "@/utils/config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -24,6 +28,22 @@ export const confirmOrder = createAsyncThunk(
       const dataFromServer = await response.json();
       // call onSuccess and onError from thunk if they're passed as args
       onSuccess && onSuccess(dataFromServer);
+    } catch (err) {
+      onError && onError(err);
+    }
+  }
+);
+
+export const cancelOrder = createAsyncThunk(
+  "cart/cancelOrder",
+  async (options: CancelOrderOptions, thunkApi) => {
+    const { orderId, onSuccess, onError } = options;
+
+    try {
+      await fetch(`${config.apiBaseUrl}/order/${orderId}`, {
+        method: "DELETE",
+      });
+      onSuccess && onSuccess();
     } catch (err) {
       onError && onError(err);
     }

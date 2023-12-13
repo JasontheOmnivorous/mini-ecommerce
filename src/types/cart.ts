@@ -24,3 +24,7 @@ export interface BasePayload {
 export interface ConfirmOrderOptions extends BasePayload {
   payload: CartItem[];
 }
+
+export interface CancelOrderOptions extends BasePayload {
+  orderId: number;
+}
