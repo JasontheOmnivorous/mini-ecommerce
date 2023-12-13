@@ -12,6 +12,10 @@ const ConfirmationPage = () => {
 
   const onSuccess = () => {
     setOpen(true);
+    // wait some time for the user to see snackbar
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   };
 
   const onError = () => {};
@@ -48,7 +52,7 @@ const ConfirmationPage = () => {
           open={open}
           autoHideDuration={6000}
           onClose={() => setOpen(false)}
-          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <Alert
             onClose={() => setOpen(false)}
