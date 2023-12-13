@@ -48,6 +48,7 @@ const ConfirmationPage = () => {
           open={open}
           autoHideDuration={6000}
           onClose={() => setOpen(false)}
+          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
         >
           <Alert
             onClose={() => setOpen(false)}
