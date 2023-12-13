@@ -1,6 +1,7 @@
 import ProductCard from "@/components/product/ProductCard";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { confirmOrder, updateQuantity } from "@/store/slices/cartSlice";
+import { OrderResponse } from "@/types/cart";
 import { AddCircle, RemoveCircle } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
@@ -24,9 +25,19 @@ const CartPage = () => {
     dispatch(updateQuantity({ id, quantity }));
   };
 
+  // define onSuccess and onError
+  const onSuccess = (data?: OrderResponse) => {
+    // redirect here because at this point, the data fetching process is completed since this func is called after that
+    router.push(
+      `/confirmation?orderId=${data?.orderId}&status=${data?.status}`
+    ); // construct query string
+  };
+
+  const onError = (data: any) => {};
+
   const handleConfirmOrder = () => {
-    dispatch(confirmOrder(cartItems));
-    router.push("/confirmation");
+    dispatch(confirmOrder({ payload: cartItems, onSuccess, onError }));
+    // we cant router.push here because it wont wait the response of confirm order and we want that responded data
   };
 
   return (
