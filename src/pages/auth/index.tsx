@@ -7,9 +7,7 @@ const AuthPage = () => {
   if (session) {
     return (
       <Box>
-        <Typography sx={{ m: 2 }}>
-          Signed in as {session.user?.email}
-        </Typography>
+        <Typography sx={{ m: 2 }}>Welcome {session.user?.name}</Typography>
         <Button variant="contained" onClick={() => signOut()}>
           Sign out
         </Button>
